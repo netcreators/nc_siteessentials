@@ -1,0 +1,143 @@
+config.tx_extbase.persistence.classes.TYPO3\NcSiteessentials\Domain\Model\Page {
+	mapping {
+		tableName = pages
+		columns {
+			tx_ncsiteessentials_xmlsitemap_exclude.mapOnProperty = excludeInSitemap
+			tx_ncsiteessentials_xmlsitemap_changefreq.mapOnProperty = changeFreq
+			tx_ncsiteessentials_googleanalytics_content.mapOnProperty = trackingCode
+			tstamp.mapOnProperty = tstamp
+		}
+	}
+}
+
+plugin.tx_ncsiteessentials {
+	# Configuration for the XML sitemap
+	settings {
+		xml_sitemap {
+			includeHideInMenu = {$plugin.tx_ncsiteessentials.settings.xml_sitemap.includeHideInMenu}
+			defaultChangeFreq = {$plugin.tx_ncsiteessentials.settings.xml_sitemap.defaultChangeFreq}
+			makeChangeFreqRecursively = {$plugin.tx_ncsiteessentials.settings.xml_sitemap.makeChangeFreqRecursively}
+			makeExcludedPagesRecursively = {$plugin.tx_ncsiteessentials.settings.xml_sitemap.makeExcludedPagesRecursively}
+			useCacheHash = {$plugin.tx_ncsiteessentials.settings.xml_sitemap.useCacheHash}
+			doktypes = {$plugin.tx_ncsiteessentials.settings.xml_sitemap.doktypes}
+		}
+		robots_txt {
+		}
+		google_analytics {
+		}
+		metatags {
+			enabled = {$plugin.tx_ncsiteessentials.settings.metatags.enabled}
+			renderAuthorEmail = {$plugin.tx_ncsiteessentials.settings.metatags.renderAuthorEmail}
+			replaceAtSign = {$plugin.tx_ncsiteessentials.settings.metatags.replaceAtSign}
+			alternativeTags {
+				robots = {$plugin.tx_ncsiteessentials.settings.metatags.alternativeTags.robots}
+				copyright = {$plugin.tx_ncsiteessentials.settings.metatags.alternativeTags.copyright}
+				contentLanguage = {$plugin.tx_ncsiteessentials.settings.metatags.alternativeTags.contentLanguage}
+				distribution = {$plugin.tx_ncsiteessentials.settings.metatags.alternativeTags.distribution}
+				revisitAfter = {$plugin.tx_ncsiteessentials.settings.metatags.alternativeTags.revisitAfter}
+			}
+		}
+		content {
+			contentPostProcOutput {
+				renderFrontendHyperlinkAttributes = {$plugin.tx_ncsiteessentials.settings.content.contentPostProcOutput.renderFrontendHyperlinkAttributes}
+				metaGeneratorTag {
+					remove = {$plugin.tx_ncsiteessentials.settings.content.contentPostProcOutput.metaGeneratorTag.remove}
+					removeVersionNumber = {$plugin.tx_ncsiteessentials.settings.content.contentPostProcOutput.metaGeneratorTag.removeVersionNumber}
+				}
+			}
+			domDocumentFormatOutput = {$plugin.tx_ncsiteessentials.settings.content.domDocumentFormatOutput}
+		}
+		# do not touch this part of the extension (this settings are needed inside the extension)
+		__extSettings {
+			defaultMetaGeneratorVersion = TYPO3 CMS
+		}
+	}
+}
+
+config.tx_extbase.mvc.callDefaultActionIfActionCantBeResolved = 1
+
+nc_xmlsitemap = PAGE
+nc_xmlsitemap {
+    typeNum = {$plugin.tx_ncsiteessentials.settings.xml_sitemap.pageTypeNum}
+	10 = USER_INT
+    10 {
+		userFunc = TYPO3\CMS\Extbase\Core\Bootstrap->run
+		pluginName = Pi1
+		extensionName = NcSiteessentials
+		vendorName = TYPO3
+		controller = XmlSitemap
+		action = render
+		switchableControllerActions {
+			XmlSitemap {
+				1 = render
+			}
+		}
+    }
+    config {
+	    disableAllHeaderCode = 1
+	    additionalHeaders = Content-type:text/xml
+	    xhtml_cleaning = 0
+	    admPanel = 0
+	    debug = 0
+		xmlprologue = <?xml version="1.0" encoding="[config.renderCharset]">
+		config.doctype (
+			<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+		)
+    }
+}
+
+nc_robotstxt = PAGE
+nc_robotstxt {
+    typeNum = {$plugin.tx_ncsiteessentials.settings.robots_txt.pageTypeNum}
+	10 = USER_INT
+    10 {
+		userFunc = TYPO3\CMS\Extbase\Core\Bootstrap->run
+		pluginName = Pi1
+		extensionName = NcSiteessentials
+		vendorName = TYPO3
+		controller = RobotsTxt
+		action = render
+		switchableControllerActions {
+			RobotsTxt {
+				1 = render
+			}
+		}
+    }
+    config {
+	    disableAllHeaderCode = 1
+	    additionalHeaders = Content-type:text/plain
+	    xhtml_cleaning = 0
+	    admPanel = 0
+	    debug = 0
+    }
+}
+
+page.2033 = USER
+page.2033 {
+	userFunc = TYPO3\CMS\Extbase\Core\Bootstrap->run
+	pluginName = Pi1
+	extensionName = NcSiteessentials
+	vendorName = TYPO3
+	controller = Metatag
+	action = render
+	switchableControllerActions {
+		Metatag {
+			1 = render
+		}
+	}
+}
+
+page.3033 = USER
+page.3033 {
+	userFunc = TYPO3\CMS\Extbase\Core\Bootstrap->run
+	pluginName = Pi1
+	extensionName = NcSiteessentials
+	vendorName = TYPO3
+	controller = GoogleAnalytics
+	action = render
+	switchableControllerActions {
+		GoogleAnalytics {
+			1 = render
+		}
+	}
+}

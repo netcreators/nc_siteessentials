@@ -1,0 +1,61 @@
+plugin.tx_ncsiteessentials {
+	settings {
+		xml_sitemap {
+			# cat=plugin.tx_ncsiteessentials_xmlsitemap/a/010; type=boolean; label=Include Hide In Menu:If set, hide in menu pages will be included
+			includeHideInMenu = 1
+			# cat=plugin.tx_ncsiteessentials_xmlsitemap/a/020; type=options[Always=always,Hourly=hourly,Daily=daily,Weekly=weekly,Monthly=monthly,Yearly=yearly,Never=never]; label=Default Change Frequency:Default Change Frequency to set when the page has no change freq configured
+			defaultChangeFreq = monthly
+			# cat=plugin.tx_ncsiteessentials_xmlsitemap/a/030; type=boolean; label=Make Change Frequency Recursively:If set, the Change Frequency will be recursively
+			makeChangeFreqRecursively = 1
+			# cat=plugin.tx_ncsiteessentials_xmlsitemap/a/040; type=boolean; label=Make Excluded Pages Recursively:If set, the option to exclude an page from the XML sitemap will be recursively
+			makeExcludedPagesRecursively = 1
+			# cat=plugin.tx_ncsiteessentials_xmlsitemap/a/050; type=boolean; label=Use Cache Hash:If set, cache hashes will be activated in the urls
+			useCacheHash = 0
+			# cat=plugin.tx_ncsiteessentials_xmlsitemap/a/060; type=string; label=Allowed Doktypes:Comma seperated list of allowed doktypes
+			doktypes = 1
+			# cat=plugin.tx_ncsiteessentials_xmlsitemap/a/070; type=int; label=Page Type Num:Defines the typeNum where the sitemap will be available on
+			pageTypeNum = 1121
+		}
+		robots_txt {
+			# cat=plugin.tx_ncsiteessentials_robotstxt/a/010; type=int; label=Page Type Num:Defines the typeNum where the robots.txt will be available on
+			pageTypeNum = 1122
+		}
+		google_analytics {
+		
+		}
+		metatags {
+			# cat=plugin.tx_ncsiteessentials_metatags/a/010; type=boolean; label=Enabled:If set, the metatags will be rendered from this extension
+			enabled = 1
+			# cat=plugin.tx_ncsiteessentials_metatags/a/020; type=boolean; label=Render Author Email:If set, the author email will be rendered if set
+			renderAuthorEmail = 0
+			# cat=plugin.tx_ncsiteessentials_metatags/a/030; type=string; label=Replace At Sign:If set, the 'at-sign' will be replaced with it
+			replaceAtSign = [at]
+			alternativeTags {
+				# cat=plugin.tx_ncsiteessentials_metatags/a/040; type=string; label=Metatag robots
+				robots = all
+				# cat=plugin.tx_ncsiteessentials_metatags/a/050; type=string; label=Metatag copyright
+				copyright = Netcreators
+				# cat=plugin.tx_ncsiteessentials_metatags/a/060; type=string; label=Metatag content-language
+				contentLanguage = 
+				# cat=plugin.tx_ncsiteessentials_metatags/a/070; type=string; label=Metatag distribution
+				distribution = global
+				# cat=plugin.tx_ncsiteessentials_metatags/a/080; type=string; label=Metatag revisit-after
+				revisitAfter = 
+			}
+		}
+		content {
+			contentPostProcOutput {
+				# cat=plugin.tx_ncsiteessentials_content/a/020; type=boolean; label=Render Front-end Hyperlink Attributes:If set, the hyperlinks will be rendered based on the renderFrontendHyperlinkAttributesConfig
+				renderFrontendHyperlinkAttributes = 0
+				metaGeneratorTag {
+					# cat=plugin.tx_ncsiteessentials_content/a/030; type=boolean; label=MetaGenerator remove tag:If set, the meta tag will be removed from the output
+					remove = 0
+					# cat=plugin.tx_ncsiteessentials_content/a/040; type=boolean; label=MetaGenerator remove version:If set, the version number will be removed from the tag
+					removeVersionNumber = 0
+				}
+			}
+			# cat=plugin.tx_ncsiteessentials_content/a/010; type=boolean; label=Dom Document Format Output:If set, it will activate the format output feature of dom document
+			domDocumentFormatOutput = 0
+		}
+	}
+}

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" date="2014-11-20T09:43:36Z" product-name="nc_siteessentials">
+		<header/>
+		<body>
+			<trans-unit id="tx_ncsiteessentials_xmlsitemap_exclude">
+				<source>Include in XML sitemap</source>
+			</trans-unit>
+			<trans-unit id="tx_ncsiteessentials_xmlsitemap_exclude.0">
+				<source>Disable</source>
+			</trans-unit>
+			<trans-unit id="tx_ncsiteessentials_xmlsitemap_changefreq">
+				<source>Change Frequency</source>
+			</trans-unit>
+			<trans-unit id="tx_ncsiteessentials_xmlsitemap_changefreq.0">
+				<source>-- select --</source>
+			</trans-unit>
+			<trans-unit id="tx_ncsiteessentials_xmlsitemap_changefreq.1">
+				<source>Always</source>
+			</trans-unit>
+			<trans-unit id="tx_ncsiteessentials_xmlsitemap_changefreq.2">
+				<source>Hourly</source>
+			</trans-unit>
+			<trans-unit id="tx_ncsiteessentials_xmlsitemap_changefreq.3">
+				<source>Daily</source>
+			</trans-unit>
+			<trans-unit id="tx_ncsiteessentials_xmlsitemap_changefreq.4">
+				<source>Weekly</source>
+			</trans-unit>
+			<trans-unit id="tx_ncsiteessentials_xmlsitemap_changefreq.5">
+				<source>Monthly</source>
+			</trans-unit>
+			<trans-unit id="tx_ncsiteessentials_xmlsitemap_changefreq.6">
+				<source>Yearly</source>
+			</trans-unit>
+			<trans-unit id="tx_ncsiteessentials_xmlsitemap_changefreq.7">
+				<source>Never</source>
+			</trans-unit>
+			<trans-unit id="tabs.ncrobotstxt">
+				<source>Robots (txt)</source>
+			</trans-unit>
+			<trans-unit id="tabs.ncrobotstxt.tx_ncsiteessentials_robotstxt_content">
+				<source>Content</source>
+			</trans-unit>
+			<trans-unit id="tabs.ncgoogleanalytics">
+				<source>Google Analytics</source>
+			</trans-unit>
+			<trans-unit id="tabs.ncgoogleanalytics.tx_ncsiteessentials_googleanalytics_content">
+				<source>Content</source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>
