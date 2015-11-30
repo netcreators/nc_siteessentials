@@ -1,4 +1,7 @@
 
+2015-11-30 v1.4.4 Klaus Bitto <klaus@netcreators.nl>
+	* XmlSitemapController::renderrenderAction() is no longer a non-cacheable controller action.
+
 2015-01-20 v1.3.0 Klaus Bitto <klaus@netcreators.nl>
 	* On some sites, the site root page is a shortcut to one of its multiple sub-pages. In this case, a sitemap
 		was only created for the shortcut target page - it was impossible to have a sitemap of the entire site created.
