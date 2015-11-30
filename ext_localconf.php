@@ -15,7 +15,6 @@ if (!defined('TYPO3_MODE')) {
 	),
 	// non-cacheable actions
 	array(
-		'XmlSitemap' => 'render',
 		'RobotsTxt' => 'render',
 	)
 );
