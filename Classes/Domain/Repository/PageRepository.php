@@ -1,5 +1,5 @@
 <?php
-namespace TYPO3\NcSiteessentials\Domain\Repository;
+namespace Netcreators\NcSiteessentials\Domain\Repository;
 
 
 /***************************************************************
@@ -7,6 +7,7 @@ namespace TYPO3\NcSiteessentials\Domain\Repository;
  *  Copyright notice
  *
  *  (c) 2014 Arek van Schaijk <arek@netcreators.nl>, Netcreators
+ *  (c) 2017 Leonie Philine Bitto <extensions@netcreators.nl>, Netcreators
  *
  *  All rights reserved
  *
@@ -27,36 +28,40 @@ namespace TYPO3\NcSiteessentials\Domain\Repository;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
+use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
+use Netcreators\NcSiteessentials\Domain\Model\Page;
+
 /**
  * The repository for Pages
  */
-class PageRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
-	
-	/**
-	 * Find One By Uid
-	 *
-	 * @param integer uid
-	 * @return $query
-	 */
-	public function findOneByUid($uid) {
-		
-		$query = $this->createQuery();
-		$query->getQuerySettings()->setRespectStoragePage(FALSE);
-		$query->matching($query->equals('uid', $uid));
-		return $query->execute()->getFirst();
-	}
+class PageRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
+{
 
-	/**
-	 * Find All Pages By Settings
-	 *
-	 * @param array $settings
-	 * @return $query
-	 */
-	public function findAllPagesBySettings(array $settings) {
-	
-		$query = $this->createQuery();
-		$query->getQuerySettings()->setRespectStoragePage(FALSE);
-		$query->setOrderings(array('uid' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING));
-		return $query->execute();
-	}
+    /**
+     * Find One By Uid
+     *
+     * @param integer $uid
+     * @return Page
+     */
+    public function findOneByUid($uid)
+    {
+        $query = $this->createQuery();
+        $query->getQuerySettings()->setRespectStoragePage(false);
+        $query->matching($query->equals('uid', $uid));
+        return $query->execute()->getFirst();
+    }
+
+    /**
+     * Find All Pages By Settings
+     *
+     * @param array $settings
+     * @return QueryResultInterface
+     */
+    public function findAllPagesBySettings(array $settings)
+    {
+        $query = $this->createQuery();
+        $query->getQuerySettings()->setRespectStoragePage(false);
+        $query->setOrderings(array('uid' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING));
+        return $query->execute();
+    }
 }

@@ -1,4 +1,4 @@
-config.tx_extbase.persistence.classes.TYPO3\NcSiteessentials\Domain\Model\Page {
+config.tx_extbase.persistence.classes.Netcreators\NcSiteessentials\Domain\Model\Page {
 	mapping {
 		tableName = pages
 		columns {
@@ -21,10 +21,15 @@ plugin.tx_ncsiteessentials {
 			useCacheHash = {$plugin.tx_ncsiteessentials.settings.xml_sitemap.useCacheHash}
 			doktypes = {$plugin.tx_ncsiteessentials.settings.xml_sitemap.doktypes}
 		}
+
 		robots_txt {
+
 		}
+
 		google_analytics {
+
 		}
+
 		metatags {
 			enabled = {$plugin.tx_ncsiteessentials.settings.metatags.enabled}
 			renderAuthorEmail = {$plugin.tx_ncsiteessentials.settings.metatags.renderAuthorEmail}
@@ -37,6 +42,7 @@ plugin.tx_ncsiteessentials {
 				revisitAfter = {$plugin.tx_ncsiteessentials.settings.metatags.alternativeTags.revisitAfter}
 			}
 		}
+
 		content {
 			contentPostProcOutput {
 				renderFrontendHyperlinkAttributes = {$plugin.tx_ncsiteessentials.settings.content.contentPostProcOutput.renderFrontendHyperlinkAttributes}
@@ -45,9 +51,11 @@ plugin.tx_ncsiteessentials {
 					removeVersionNumber = {$plugin.tx_ncsiteessentials.settings.content.contentPostProcOutput.metaGeneratorTag.removeVersionNumber}
 				}
 			}
+
 			domDocumentFormatOutput = {$plugin.tx_ncsiteessentials.settings.content.domDocumentFormatOutput}
 		}
-		# do not touch this part of the extension (this settings are needed inside the extension)
+
+		# do not touch this part of the extension (these settings are needed inside the extension)
 		__extSettings {
 			defaultMetaGeneratorVersion = TYPO3 CMS
 		}
@@ -58,13 +66,13 @@ config.tx_extbase.mvc.callDefaultActionIfActionCantBeResolved = 1
 
 nc_xmlsitemap = PAGE
 nc_xmlsitemap {
-    typeNum = {$plugin.tx_ncsiteessentials.settings.xml_sitemap.pageTypeNum}
+	typeNum = {$plugin.tx_ncsiteessentials.settings.xml_sitemap.pageTypeNum}
 	10 = USER_INT
-    10 {
+	10 {
 		userFunc = TYPO3\CMS\Extbase\Core\Bootstrap->run
 		pluginName = Pi1
 		extensionName = NcSiteessentials
-		vendorName = TYPO3
+		vendorName = Netcreators
 		controller = XmlSitemap
 		action = render
 		switchableControllerActions {
@@ -72,29 +80,30 @@ nc_xmlsitemap {
 				1 = render
 			}
 		}
-    }
-    config {
-	    disableAllHeaderCode = 1
-	    additionalHeaders = Content-type:text/xml
-	    xhtml_cleaning = 0
-	    admPanel = 0
-	    debug = 0
+	}
+
+	config {
+		disableAllHeaderCode = 1
+		additionalHeaders = Content-type:text/xml
+		xhtml_cleaning = 0
+		admPanel = 0
+		debug = 0
 		xmlprologue = <?xml version="1.0" encoding="[config.renderCharset]">
 		config.doctype (
 			<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
 		)
-    }
+	}
 }
 
 nc_robotstxt = PAGE
 nc_robotstxt {
-    typeNum = {$plugin.tx_ncsiteessentials.settings.robots_txt.pageTypeNum}
+	typeNum = {$plugin.tx_ncsiteessentials.settings.robots_txt.pageTypeNum}
 	10 = USER_INT
-    10 {
+	10 {
 		userFunc = TYPO3\CMS\Extbase\Core\Bootstrap->run
 		pluginName = Pi1
 		extensionName = NcSiteessentials
-		vendorName = TYPO3
+		vendorName = Netcreators
 		controller = RobotsTxt
 		action = render
 		switchableControllerActions {
@@ -102,14 +111,15 @@ nc_robotstxt {
 				1 = render
 			}
 		}
-    }
-    config {
-	    disableAllHeaderCode = 1
-	    additionalHeaders = Content-type:text/plain
-	    xhtml_cleaning = 0
-	    admPanel = 0
-	    debug = 0
-    }
+	}
+
+	config {
+		disableAllHeaderCode = 1
+		additionalHeaders = Content-type:text/plain
+		xhtml_cleaning = 0
+		admPanel = 0
+		debug = 0
+	}
 }
 
 page.2033 = USER
@@ -117,7 +127,7 @@ page.2033 {
 	userFunc = TYPO3\CMS\Extbase\Core\Bootstrap->run
 	pluginName = Pi1
 	extensionName = NcSiteessentials
-	vendorName = TYPO3
+	vendorName = Netcreators
 	controller = Metatag
 	action = render
 	switchableControllerActions {
@@ -132,7 +142,7 @@ page.3033 {
 	userFunc = TYPO3\CMS\Extbase\Core\Bootstrap->run
 	pluginName = Pi1
 	extensionName = NcSiteessentials
-	vendorName = TYPO3
+	vendorName = Netcreators
 	controller = GoogleAnalytics
 	action = render
 	switchableControllerActions {

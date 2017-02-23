@@ -1,11 +1,12 @@
 <?php
-namespace TYPO3\NcSiteessentials;
+namespace Netcreators\NcSiteessentials;
 
 /***************************************************************
  *
  *  Copyright notice
  *
  *  (c) 2015 Arek van Schaijk <arek@netcreators.nl>, Netcreators
+ *  (c) 2017 Leonie Philine Bitto <extensions@netcreators.nl>, Netcreators
  *
  *  All rights reserved
  *
@@ -28,7 +29,7 @@ namespace TYPO3\NcSiteessentials;
 
 /**
  * Class Exception
- * @package TYPO3\NcSiteessentials
+ * @package Netcreators\NcSiteessentials
  */
 class Exception extends \TYPO3\CMS\Core\Exception {
 

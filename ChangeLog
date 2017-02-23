@@ -1,8 +1,14 @@
 
-2015-11-30 v1.4.4 Klaus Bitto <klaus@netcreators.nl>
+2017-02-23 v1.5.0 Leonie Philine Bitto <leonie@netcreators.nl>
+	* Made URI creation independent of baseURL and absRefPrefix configurations.
+	* Fixed root Namespace - from \TYPO3\ to \Netcreators\.
+	* Formatted for PSR-2.
+	* Last version for TYPO3 6.2.
+
+2015-11-30 v1.4.4 Leonie Philine Bitto <leonie@netcreators.nl>
 	* XmlSitemapController::renderrenderAction() is no longer a non-cacheable controller action.
 
-2015-01-20 v1.3.0 Klaus Bitto <klaus@netcreators.nl>
+2015-01-20 v1.3.0 Leonie Philine Bitto <leonie@netcreators.nl>
 	* On some sites, the site root page is a shortcut to one of its multiple sub-pages. In this case, a sitemap
 		was only created for the shortcut target page - it was impossible to have a sitemap of the entire site created.
 		This is now fixed:	If the current page is a direct child of the site root page, and the site root page links to

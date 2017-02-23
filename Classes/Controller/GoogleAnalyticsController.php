@@ -1,11 +1,12 @@
 <?php
-namespace TYPO3\NcSiteessentials\Controller;
+namespace Netcreators\NcSiteessentials\Controller;
 
 /***************************************************************
  *
  *  Copyright notice
  *
  *  (c) 2014 Arek van Schaijk <arek@netcreators.nl>, Netcreators
+ *  (c) 2017 Leonie Philine Bitto <extensions@netcreators.nl>, Netcreators
  *
  *  All rights reserved
  *
@@ -25,31 +26,49 @@ namespace TYPO3\NcSiteessentials\Controller;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
+use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
 /**
  * GoogleAnalyticsController
  */
-class GoogleAnalyticsController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController {
-	
-	/**
-	 * pageRepository
-	 * 
-	 * @var \TYPO3\NcSiteessentials\Domain\Repository\PageRepository
-	 * @inject
-	 */
-	protected $pageRepository = NULL;
+class GoogleAnalyticsController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
+{
 
-	/**
-	 * action render
-	 * 
-	 * @return void
-	 */
-	public function renderAction() {
-		
-		$rootPage = $this->pageRepository->findOneByUid($GLOBALS['TSFE']->rootLine[0]['uid']);
+    /**
+     * pageRepository
+     *
+     * @var \Netcreators\NcSiteessentials\Domain\Repository\PageRepository
+     * @inject
+     */
+    protected $pageRepository = null;
+
+    /**
+     * action render
+     *
+     * @return void
+     */
+    public function renderAction()
+    {
+
+        $rootPage = $this->pageRepository->findOneByUid($this->getTypoScriptFrontendController()->rootLine[0]['uid']);
         if ($rootPage) {
-		    $this->response->addAdditionalHeaderData((string)$rootPage->getTrackingCode());
+
+            $this->getTypoScriptFrontendController(
+            )->additionalHeaderData['nc_siteessentials_googleAnalyticsTrackingCode']
+                = (string)$rootPage->getTrackingCode();
         }
-		return FALSE;
-	}
+
+        // prevent fluid template rendering.
+        $this->view = null;
+
+        return;
+    }
+
+    /**
+     * @return TypoScriptFrontendController
+     */
+    protected function getTypoScriptFrontendController()
+    {
+        return $GLOBALS['TSFE'];
+    }
 }

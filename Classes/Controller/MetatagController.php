@@ -1,11 +1,12 @@
 <?php
-namespace TYPO3\NcSiteessentials\Controller;
+namespace Netcreators\NcSiteessentials\Controller;
 
 /***************************************************************
  *
  *  Copyright notice
  *
  *  (c) 2014 Arek van Schaijk <arek@netcreators.nl>, Netcreators
+ *  (c) 2017 Leonie Philine Bitto <extensions@netcreators.nl>, Netcreators
  *
  *  All rights reserved
  *
@@ -25,110 +26,147 @@ namespace TYPO3\NcSiteessentials\Controller;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
+use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
 /**
  * MetatagController
  */
-class MetatagController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController {
-	
-	/**
-	 * HeaderContent
-	 *
-	 * @param string $headerContent
-	 */
-	protected $headerContent = '';
+class MetatagController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
+{
 
-	/**
-	 * pageRepository
-	 * 
-	 * @var \TYPO3\NcSiteessentials\Domain\Repository\PageRepository
-	 * @inject
-	 */
-	protected $pageRepository = NULL;
+    /**
+     * HeaderContent
+     *
+     * @param string $headerContent
+     */
+    protected $headerContent = '';
 
-	/**
-	 * action render
-	 * 
-	 * @return void
-	 */
-	public function renderAction() {
+    /**
+     * pageRepository
+     *
+     * @var \Netcreators\NcSiteessentials\Domain\Repository\PageRepository
+     * @inject
+     */
+    protected $pageRepository = null;
 
-		// checks if the metatags are enabled
-		if($this->settings['metatags']['enabled']) {
-			
-			// get current page
-			$page = $this->pageRepository->findOneByUid($GLOBALS['TSFE']->id);
+    /**
+     * action render
+     *
+     * @return void
+     */
+    public function renderAction()
+    {
+        // checks if the metatags are enabled
+        if (!$this->settings['metatags']['enabled']) {
+            return;
+        }
 
-			// meta description
-			if($metaDescription = $this->trimAndRemoveNewLines($page->getDescription()))
-				$this->addMetaTag('description', NULL, $metaDescription);
-				
-			// meta keywords
-			if($metaKeywords = $this->trimAndRemoveNewLines($page->getKeywords()))
-				$this->addMetaTag('keywords', NULL, $metaKeywords);
-				
-			// meta abstract
-			if($metaAbstract = $this->trimAndRemoveNewLines($page->getAbstract()))
-				$this->addMetaTag('abstract', NULL, $metaAbstract);
-				
-			// meta author
-			if($metaAuthor = $this->trimAndRemoveNewLines($page->getAuthor())) {
-				
-				$authorEmail = NULL;
-				// meta author email
-				if($this->settings['metatags']['renderAuthorEmail'] && $page->getAuthorEmail())
-					$authorEmail = ', '.($this->settings['metatags']['replaceAtSign'] ? str_replace('@', $this->settings['metatags']['replaceAtSign'], $page->getAuthorEmail()) : $page->getAuthorEmail());
-					
-				$this->addMetaTag('author', NULL, $metaAuthor.$authorEmail);
-			}
-			
-			// meta robots
-			if($this->settings['metatags']['alternativeTags']['robots'])
-				$this->addMetaTag('robots', NULL, $this->settings['metatags']['alternativeTags']['robots']);
-			
-			// meta copyright
-			if($this->settings['metatags']['alternativeTags']['copyright'])
-				$this->addMetaTag('copyright', NULL, $this->settings['metatags']['alternativeTags']['copyright']);
-				
-			// meta content-language
-			if($this->settings['metatags']['alternativeTags']['contentLanguage'])
-				$this->addMetaTag(NULL, 'content-language', $this->settings['metatags']['alternativeTags']['contentLanguage']);
-				
-			// meta distribution
-			if($this->settings['metatags']['alternativeTags']['distribution'])
-				$this->addMetaTag('distribution', NULL, $this->settings['metatags']['alternativeTags']['distribution']);
-				
-			// meta revisit-after
-			if($this->settings['metatags']['alternativeTags']['revisitAfter'])
-				$this->addMetaTag('revisit-after', NULL, $this->settings['metatags']['alternativeTags']['revisitAfter']);
-			
-			// render header content
-			$this->response->addAdditionalHeaderData($this->headerContent);
-		}
-		
-		return FALSE;
-	}
-	
-	/**
-	 * Trim And Remove New Lines
-	 *
-	 * @param string $string
-	 * @return string
-	 */
-	public function trimAndRemoveNewLines($string) {
-		
-		return trim(preg_replace('/\s\s+/', ' ', $string));
-	}
-	
-	/**
-	 * Add Meta Tag
-	 *
-	 * @param string $name
-	 * @param string $httpEquiv
-	 * @return void
-	 */
-	public function addMetaTag($name = NULL, $httpEquiv, $content) {
-		
-		$this->headerContent .= '<meta '.($name ? 'name="'.$name.'"' : '').($httpEquiv ? 'http-equiv="'.$httpEquiv.'"' : '').' content="'.$content.'" />'.PHP_EOL;
-	}
+        // get current page
+        $page = $this->pageRepository->findOneByUid($this->getTypoScriptFrontendController()->id);
+
+        // meta description
+        if ($metaDescription = $this->trimAndRemoveNewLines($page->getDescription())) {
+            $this->addMetaTag('description', null, $metaDescription);
+        }
+
+        // meta keywords
+        if ($metaKeywords = $this->trimAndRemoveNewLines($page->getKeywords())) {
+            $this->addMetaTag('keywords', null, $metaKeywords);
+        }
+
+        // meta abstract
+        if ($metaAbstract = $this->trimAndRemoveNewLines($page->getAbstract())) {
+            $this->addMetaTag('abstract', null, $metaAbstract);
+        }
+
+        // meta author
+        if ($metaAuthor = $this->trimAndRemoveNewLines($page->getAuthor())) {
+
+            $authorEmail = null;
+            // meta author email
+            if ($this->settings['metatags']['renderAuthorEmail'] && $page->getAuthorEmail()) {
+                $authorEmail = ', ' . ($this->settings['metatags']['replaceAtSign'] ? str_replace(
+                        '@',
+                        $this->settings['metatags']['replaceAtSign'],
+                        $page->getAuthorEmail()
+                    ) : $page->getAuthorEmail());
+            }
+
+            $this->addMetaTag('author', null, $metaAuthor . $authorEmail);
+        }
+
+        // meta robots
+        if ($this->settings['metatags']['alternativeTags']['robots']) {
+            $this->addMetaTag('robots', null, $this->settings['metatags']['alternativeTags']['robots']);
+        }
+
+        // meta copyright
+        if ($this->settings['metatags']['alternativeTags']['copyright']) {
+            $this->addMetaTag('copyright', null, $this->settings['metatags']['alternativeTags']['copyright']);
+        }
+
+        // meta content-language
+        if ($this->settings['metatags']['alternativeTags']['contentLanguage']) {
+            $this->addMetaTag(
+                null,
+                'content-language',
+                $this->settings['metatags']['alternativeTags']['contentLanguage']
+            );
+        }
+
+        // meta distribution
+        if ($this->settings['metatags']['alternativeTags']['distribution']) {
+            $this->addMetaTag('distribution', null, $this->settings['metatags']['alternativeTags']['distribution']);
+        }
+
+        // meta revisit-after
+        if ($this->settings['metatags']['alternativeTags']['revisitAfter']) {
+            $this->addMetaTag(
+                'revisit-after',
+                null,
+                $this->settings['metatags']['alternativeTags']['revisitAfter']
+            );
+        }
+
+        // render header content
+        $this->getTypoScriptFrontendController()->additionalHeaderData['nc_siteessentials_metaTags']
+            = $this->headerContent;
+
+        // prevent fluid template rendering.
+        $this->view = null;
+    }
+
+    /**
+     * Trim And Remove New Lines
+     *
+     * @param string $string
+     * @return string
+     */
+    public function trimAndRemoveNewLines($string)
+    {
+        return trim(preg_replace('/\s\s+/', ' ', $string));
+    }
+
+    /**
+     * Add Meta Tag
+     *
+     * @param string $name
+     * @param string $httpEquiv
+     * @param $content
+     * @return void
+     */
+    public function addMetaTag($name = null, $httpEquiv, $content)
+    {
+        $this->headerContent .= '<meta ' . ($name ? 'name="' . $name . '"' : '')
+            . ($httpEquiv ? 'http-equiv="' . $httpEquiv . '"' : '')
+            . ' content="' . $content . '" />' . PHP_EOL;
+    }
+
+    /**
+     * @return TypoScriptFrontendController
+     */
+    protected function getTypoScriptFrontendController()
+    {
+        return $GLOBALS['TSFE'];
+    }
 }

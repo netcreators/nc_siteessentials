@@ -1,11 +1,12 @@
 <?php
-namespace TYPO3\NcSiteessentials\Controller;
+namespace Netcreators\NcSiteessentials\Controller;
 
 /***************************************************************
  *
  *  Copyright notice
  *
  *  (c) 2014 Arek van Schaijk <arek@netcreators.nl>, Netcreators
+ *  (c) 2017 Leonie Philine Bitto <extensions@netcreators.nl>, Netcreators
  *
  *  All rights reserved
  *
@@ -25,22 +26,32 @@ namespace TYPO3\NcSiteessentials\Controller;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
+use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
 /**
  * RobotsTxtController
  */
-class RobotsTxtController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController {
+class RobotsTxtController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
+{
 
-	/**
-	 * action render
-	 * 
-	 * @return void
-	 */
-	public function renderAction() {
-		
-		// TEMPORARY FIX: Since another extensions or TYPO3 will output some html this wil fix this problem
-		header('Content-Type: text/plain');
-		echo $GLOBALS['TSFE']->page['tx_ncsiteessentials_robotstxt_content'];
-		exit;
-	}
+    /**
+     * action render
+     *
+     * @return void
+     */
+    public function renderAction()
+    {
+        // TEMPORARY FIX: Since another extensions or TYPO3 will output some html this wil fix this problem
+        header('Content-Type: text/plain');
+        echo $this->getTypoScriptFrontendController()->page['tx_ncsiteessentials_robotstxt_content'];
+        exit;
+    }
+
+    /**
+     * @return TypoScriptFrontendController
+     */
+    protected function getTypoScriptFrontendController()
+    {
+        return $GLOBALS['TSFE'];
+    }
 }
