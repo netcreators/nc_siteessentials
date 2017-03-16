@@ -10,24 +10,23 @@
  * "version" and "dependencies" must not be touched!
  ***************************************************************/
 
-$EM_CONF[$_EXTKEY] = array(
+$EM_CONF[$_EXTKEY] = [
 	'title' => 'Site Essentials',
 	'description' => 'This extension contains basic site functionality like a xml sitemap, easy way to manage the Google Analytics code and robots.txt on rootpage level',
 	'category' => 'plugin',
-	'author' => 'Leonie Philine Bitto [Netcreators], Arek van Schaijk [Netcreators]',
+	'author' => 'Leonie Philine Bitto [Netcreators], Arek van Schaijk',
 	'author_email' => 'extensions@netcreators.nl',
-	'state' => 'beta',
+	'state' => 'stable',
 	'uploadfolder' => '0',
 	'createDirs' => '',
 	'clearCacheOnLoad' => 0,
-	'version' => '1.5.0',
-	'constraints' => array(
-		'depends' => array(
-			'typo3' => '6.2.0-6.2.99',
-		),
-		'conflicts' => array(
-		),
-		'suggests' => array(
-		),
-	),
-);
+	'version' => '1.6.0',
+	'constraints' => [
+		'depends' => [
+			'typo3' => '7.6.15-7.6.99',
+			'php' => '5.4.0-5.6.99',
+		],
+		'conflicts' => [],
+		'suggests' => [],
+	],
+];

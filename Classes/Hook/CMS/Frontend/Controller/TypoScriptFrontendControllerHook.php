@@ -44,7 +44,7 @@ class TypoScriptFrontendControllerHook
     /**
      * @var array $settings
      */
-    protected $settings = array();
+    protected $settings = [];
 
     /**
      * @var string $content

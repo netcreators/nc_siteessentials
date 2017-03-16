@@ -41,12 +41,12 @@ class XmlSitemapBaseController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionC
     /**
      * @var array $pagesArray
      */
-    public $pages = array();
+    public $pages = [];
 
     /**
      * @var array $sitemap
      */
-    public $sitemap = array();
+    public $sitemap = [];
 
     /**
      * @var boolean $hasChangeFreq
@@ -56,7 +56,7 @@ class XmlSitemapBaseController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionC
     /**
      * @var array $allowedDoktypes
      */
-    public $allowedDoktypes = array();
+    public $allowedDoktypes = [];
 
     /**
      * @var array
@@ -101,7 +101,7 @@ class XmlSitemapBaseController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionC
             if ($page->getPid()) {
 
                 if (!$this->pages[$page->getPid()]['subs']) {
-                    $this->pages[$page->getPid()]['subs'] = array();
+                    $this->pages[$page->getPid()]['subs'] = [];
                 }
 
                 $this->pages[$page->getPid()]['subs'][] = $page->getUid();
@@ -175,15 +175,15 @@ class XmlSitemapBaseController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionC
      * @param array $params
      * @return void
      */
-    protected function addPageToSitemap($pageUid, $timestamp, $changeFreq, $params = array())
+    protected function addPageToSitemap($pageUid, $timestamp, $changeFreq, $params = [])
     {
 
-        $this->sitemap[] = array(
+        $this->sitemap[] = [
             'pageUid' => $pageUid,
             'params' => $params,
             'timestamp' => $timestamp,
             'changeFreq' => $changeFreq,
-        );
+        ];
     }
 
     /**
@@ -251,7 +251,7 @@ class XmlSitemapBaseController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionC
                     if (strpos($configuration['sitemapPids'], ',') !== false) {
                         $showOnPids = GeneralUtility::trimExplode(',', $configuration['sitemapPids']);
                     } else {
-                        $showOnPids = array($configuration['sitemapPids']);
+                        $showOnPids = [$configuration['sitemapPids']];
                     }
                 }
                 if (!$showOnPids || in_array($currentPid, $showOnPids)) {
@@ -270,7 +270,7 @@ class XmlSitemapBaseController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionC
     protected function handleCustomMapping($configuration)
     {
 
-        $this->fields = array();
+        $this->fields = [];
         if ($configuration['record']['tableName'] && $GLOBALS['TCA'][$configuration['record']['tableName']]) {
             $fieldTimestamp = $GLOBALS['TCA'][$configuration['record']['tableName']]['ctrl']['tstamp'];
             if ($configuration['record']['timestamp']['field']) {
@@ -283,7 +283,7 @@ class XmlSitemapBaseController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionC
             $this->searchRecursivelyForFields($configuration['record']['params']);
         }
 
-        $where = array();
+        $where = [];
         if ($configuration['record']['where']) {
             $where[] = $configuration['record']['where'];
         }
@@ -313,7 +313,7 @@ class XmlSitemapBaseController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionC
         }
 
         if ($configuration['record']['storagePids']) {
-            $pids = array();
+            $pids = [];
             if (strpos($configuration['record']['storagePids'], ',') !== false) {
                 foreach (GeneralUtility::trimExplode(',', $configuration['record']['storagePids']) as $pid) {
                     if (ctype_digit($pid)) {
@@ -345,7 +345,7 @@ class XmlSitemapBaseController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionC
             'uid DESC'
         );
         foreach ($rows as $row) {
-            $this->params = array();
+            $this->params = [];
             $params = $this->setParametersRecursively($configuration['record']['params'], $row);
             $this->addPageToSitemap($configuration['record']['singlePid'], $row['timestamp'], $changeFreq, $params);
         }
@@ -430,7 +430,7 @@ class XmlSitemapBaseController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionC
      * @param array $additionalParams
      * @return string
      */
-    protected function getFrontendUri($pageUid, array $additionalParams = array())
+    protected function getFrontendUri($pageUid, array $additionalParams = [])
     {
 
         // get uri builder
