@@ -1,5 +1,5 @@
 
-2017-02-23 v1.6.0 Leonie Philine Bitto <leonie@netcreators.nl>
+2017-03-16 v1.6.0 Leonie Philine Bitto <leonie@netcreators.nl>
 	* Version for TYPO3 7.6 LTS.
 	* Removed feInterface.
 	* Moved TCA overrides from ext_tables.php into Configuration/TCA/Overrides/
